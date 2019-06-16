@@ -4,7 +4,7 @@
 clear all; clc;
 
 % Run time
-t_run = 20; % days
+t_run = 50; % days
 
 % Pool dimensions
 l = 8.1; % m
@@ -14,6 +14,13 @@ h = 1.5; % m
 % Pool surfaces
 A_water = l*w; % m^2
 A_tank = 2*w*h + 2*l*h + l*w; % m^2
+
+% Pool volume
+V_pool = l*w*h;
+
+% Water
+c_water = 4184;
+q_water = 2257e3;
 
 % Water circulation time
 circ_time = 10; % h
@@ -41,7 +48,7 @@ T_Gmax = (T_Amax + T_Amin)/2 + 1; % °C
 P_air_ground = pi/4; % 3 h delay with respect to the air temperature
 
 % Thermal insulance of soil
-Rth_G = 0.2; % (m^2 * K)/W
+Rth_G = 2; % (m^2 * K)/W
 
 % Perpendicular solar power
 P_Sperp = 1.36e3; % W
@@ -53,6 +60,10 @@ k = mean(k_water);
 % Solar power
 absorption = 1 - exp(-2*k*h); % ()
 P_Smax = absorption*P_Sperp; % W
+
+% Evaporation
+m_ev = (109.6 + 3.9) / 50; % kg / d
+P_ev = m_ev * ((100-20) * c_water + q_water) / 24 / 3600; % W 
 
 % -------------------------------------------------------------------------
 % Simscape model
