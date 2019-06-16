@@ -6,6 +6,14 @@ clear all; close all; clc;
 % Run time
 t_run = 50; % days
 
+% Desired temperature
+T_P = 30; % °C
+Hysteresis = 2; % °C
+
+% Temperatures
+min_temp = T_P - Hysteresis/2 + 273.15;
+max_temp = T_P + Hysteresis/2 + 273.15;
+
 % Pool dimensions
 l = 8.1; % m
 w = 4; % m
@@ -27,7 +35,7 @@ circ_time = 48; % h
 MFR = 1000*l*w*h/(circ_time*3600); % kg/s
 
 % Heater (Plumbing etc.)
-P_Heater = 4500; % W
+P_Heater = 4707; % W
 
 r = 0.05; % m
 Dh = 2*r; % m
@@ -84,7 +92,7 @@ sim(mdl);
 
 % -------------------------------------------------------------------------
 % Pool temperature
-figure('Name', 'Swimming Pool Temperature', 'HandleVisibility', 'on');
+figure('Name', 'Swimming Pool Temperature');
 plot(sim.time/24/3600, sim.data-273.15);
 title('Swimming Pool Temperature');
 grid on; xlabel('Time t (days)'); ylabel('Temperature T (°C)');
