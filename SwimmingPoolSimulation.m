@@ -4,7 +4,7 @@
 clear all; close all; clc;
 
 % Run time
-t_run = 50; % days
+t_run = 30; % days
 
 % Desired temperature
 T_P = 30; % °C
@@ -32,10 +32,11 @@ q_water = 2257e3;
 
 % Water circulation time
 circ_time = 48; % h
-MFR = 1000*l*w*h/(circ_time*3600); % kg/s
+MFR = 1000*V_pool/(circ_time*3600); % kg/s
 
 % Heater (Plumbing etc.)
-P_Heater = 4707; % W
+P_Heater = 3530; % W
+U_Heater = sqrt(P_Heater*15);
 
 r = 0.05; % m
 Dh = 2*r; % m
