@@ -1,0 +1,44 @@
+\documentclass[final]{header/fhnwreport}
+
+\input{header/header}
+
+\title{\textbf{{\Huge Swimming Pool Simulation}}}
+\author{{\LARGE Pascal Fankhauser, Nico Canzani und Dominik Müller}}
+\date{{\LARGE Windisch, \the\day.\MONTHGERMAN \the\year}}
+
+\begin{document}
+
+% Title -------------------------------------------------------------------
+\selectlanguage{ngerman}
+\maketitle
+
+\vspace*{2cm}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{pool}
+\end{figure}
+
+\clearpage
+
+% Table of Contents -------------------------------------------------------
+\pagenumbering{Roman}
+\selectlanguage{ngerman}
+\tableofcontents
+\clearpage
+
+% Text --------------------------------------------------------------------
+\pagenumbering{arabic}
+\selectlanguage{ngerman}
+\include{sections/grundlagen}
+\include{sections/aufbau}
+\include{sections/resultate}
+\include{sections/zusammenfassung}
+
+% Bibliography ------------------------------------------------------------
+\printbibliography[heading=bibintoc]
+\label{sec:literature}
+
+% Appendix ----------------------------------------------------------------
+\include{sections/appendix}
+
+\end{document}
