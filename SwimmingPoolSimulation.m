@@ -1,7 +1,7 @@
 %% Swimming Pool Simulation
 % created by Pascal Fankhauser, Nico Canzani and Dominik Mueller
 
-clear all; clc;
+clear all; close all; clc;
 
 % Run time
 t_run = 50; % days
@@ -23,8 +23,8 @@ c_water = 4184;
 q_water = 2257e3;
 
 % Water circulation time
-circ_time = 10; % h
-MFR = 1000*l*w*h/(8*3600); % kg/s
+circ_time = 48; % h
+MFR = 1000*l*w*h/(circ_time*3600); % kg/s
 
 % Heater (Plumbing etc.)
 P_Heater = 4500; % W
@@ -70,19 +70,21 @@ P_ev = m_ev * ((100-20) * c_water + q_water) / 24 / 3600; % W
 % Simscape model
 mdl = 'SwimmingPoolSimulationModel';
 
-% Start time
-set_param(mdl, 'StartTime', '0.0');
-% Stop time
-set_param(mdl, 'StopTime', num2str(t_run*24*3600));
-
 % Open model
-% open(mdl);
+open(mdl);
+% Set start time
+set_param(mdl, 'StartTime', '0.0');
+% Set stop time
+set_param(mdl, 'StopTime', num2str(t_run*24*3600));
+% Set max step size (for better accuracy)
+set_param(mdl, 'MaxStep', '100');
+
 % Numerical solution
 sim(mdl);
 
 % -------------------------------------------------------------------------
 % Pool temperature
-figure('Name', 'Swimming Pool Temperature');
+figure('Name', 'Swimming Pool Temperature', 'HandleVisibility', 'on');
 plot(sim.time/24/3600, sim.data-273.15);
 title('Swimming Pool Temperature');
 grid on; xlabel('Time t (days)'); ylabel('Temperature T (°C)');
