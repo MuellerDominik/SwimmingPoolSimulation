@@ -40,7 +40,7 @@ H_length = 0.5; % m
 T_Amin = 8; % °C
 T_Amax = 19; % °C
 
-h_pool_air = 10; % W/(m^2 * K)
+h_pool_air = 8; % W/(m^2 * K)
 
 % Ground temperatures
 T_Gmin = (T_Amax + T_Amin)/2 - 1; % °C
@@ -62,6 +62,7 @@ absorption = 1 - exp(-2*k*h); % ()
 P_Smax = absorption*P_Sperp; % W
 
 % Evaporation
+% (https://imsc.uni-graz.at/keeling/modI_ss13/projekten/HaschekSteuberBericht.pdf)
 m_ev = (109.6 + 3.9) / 50; % kg / d
 P_ev = m_ev * ((100-20) * c_water + q_water) / 24 / 3600; % W 
 
