@@ -8,5 +8,48 @@ Die Aufgabe besteht darin, einen beheizten Swimmingpool zu modellieren und zu si
 
 \subsection{Annahmen}
 \label{subsec:Annahmen}
-% Nico
+Dass eine möglichst realistische Simulation durchgeführt werden kann, wird ein physisch existierender Pool mit dem Simscape-Model angenähert. Um den komplexen Vorgang der Natur beschreiben zu können, werden dabei diverse Annahmen und Vereinfachungen getroffen.
 
+\begin{table}[h]
+	\begin{tabular}{l|l}
+		Pool / Umgebung              & Annahme                                 \\ \hline
+		Länge                        & 8.1 m                                   \\
+		Breite                       & 4 m                                     \\
+		Höhe                         & 1.5 m                                   \\
+		Solltemperatur Pool          & 30 °C                                   \\
+		Lufttemperatur      		 & 8 °C bis 19 °C                          \\
+		Funktion der Lufttemperatur  & Sinus                                   \\
+		Bodentemperatur              & Mittelwert der Lufttemperatur ± 1 °C    \\
+		Funktion der Bodentemperatur & Sinus, 3 h verzögert gegenüber der Luft \\
+		Luftfeuchtigkeit             & 50 \%                                   \\
+		Sonne                        & Täglich 12 h                            \\
+		Funktion der Sonne           & Cosinus quadrat                         \\
+		Hysterese der Reglung		 & 1 °C									   \\
+		Strahlungsaustausch			 & vernachlässigbar						   \\
+		Wind						 & konstant sehr schwach
+	\end{tabular}
+\end{table}
+
+
+Beim Pool, welcher als Model dient, ist eine Wärmepumpe installiert. Diese erzeugt eine Temperaturdifferenz von 3 K. Mit einem Volumenstrom von 1013 L/h erreicht man, dass der vorgegebene Pool eine Umwälzzeit von genau zwei Tagen besitzt. Das ergibt eine Heizleistung von:
+
+\begin{equation}
+	P = c_w \cdot \Delta T_w \cdot Q = 4184 \frac{J}{kg \cdot K} \cdot 3 K \cdot \frac{1013 \frac{L}{h}}{3600} = 3.53 kW
+	\label{eq:Energie Wärmepumpe}
+\end{equation}
+Der simulierte Pool wird deshalb mit einer Leistung von 3.53 kW geheizt.
+
+Folgende Literaturwerte werden in den Berechnungen im Matlab verwendet:
+
+\begin{table}[h]
+	\begin{tabular}{l|l|ll}
+														& Symbol		& Wert 					& 		 							\\ \hline
+		Spezifische Wärmekapazität						& $c_w$ 		& 4184 $J/(kg K)$ 		& \cite{wiki:Wassereigenschaften} 	\\
+		Verdampfungswärme								& $q_w$ 		& 2257 $kJ/kg$ 			& \cite{wiki:Wassereigenschaften} 	\\
+		Wärmeübergangskoeffizient Wasser Luft			& $h_{PoolAir}$ & 8 $W/(m^2 K)$			& \cite{Waermeuebergang}			\\
+		Thermischer Widerstand Beton 					& $Rth_G$ 		& 2 $m^2K/W$			& \cite{Betonwiderstand}			\\
+		Absorptionskoeffizient 							& k				& 0.1917 1/m			& \cite{Waermekoeffizient}			\\
+		Sonnenenergie pro Quadratmeter					& $P_{Sperp}$	& 1,36 kW				& \cite{EnergieDerSonne}			\\
+		Verdunstendes Wasser pro Quadratmeter und Tag	& $m_{ev}$		& 2.27kg 				& \cite{WasserVerdunsten}
+	\end{tabular}
+\end{table}
