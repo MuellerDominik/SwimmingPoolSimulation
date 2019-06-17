@@ -1,16 +1,18 @@
 \section{Simulation}
 \label{sec:Simulation}
-% Dominik
+Die Simulation verfügt über einen Tank, welcher den Pool modelliert, eine Umwälzpumpe und eine Heizung. Des Weiteren wird ein Thermostat zur Temperaturregelung und ein thermisches Netzwerk zur Modellierung der Umgebung eingesetzt.
+
+Um die Simulation übersichtlicher zu Gestalten wurde diese in Teilsysteme unterteilt. Diese werden im nachfolgenden Unterkapitel genauer erläutert.
 
 \subsection{Teilsysteme}
 \label{subsec:Teilsysteme}
+Die Simulation verfügt über die folgenden drei Teilsysteme:
 
 \paragraph{Thermostat}
-% Dominik
+Der Thermostat wurde mit einer MATLAB-Funktion realisiert. Dazu wurde eine \texttt{persistent} Variable verwendet, welche ihren Wert zwischen Funktionsaufrufen beibehält und den Heizzustand speichert. Weiter wird geprüft, ob die aktuelle Temperatur innerhalb eines definierten Bereichs liegt. Dies entspricht einem einfachen Zweipunktregler mit einer Hysterese.
+
+\paragraph{Heizung}
+Die Heizung wurde mit einem elektrischen Durchlauferhitzer modelliert. Dazu wird während dem Heizvorgang die entsprechende Spannung an einem Leistungswiderstand angelegt. Die entstehende Wärme wird dann über ein 0.5\,m langes Kupferrohr mit einem Durchmesser von 10\,cm durch Wärmeleitung in das Wasser übertragen. Die Leistung des Durchlauferhitzers entspricht der berechneten Leistung der Wärmepumpe.
 
 \paragraph{Umgebung}
 % Nico
-
-\paragraph{Heizung}
-% Nico
-
